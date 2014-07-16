@@ -1,10 +1,12 @@
 /*
 ########################################################################                                                                 
-# Program Name: Pi_Cam_Color_Ball_Picker.cpp                                     
+# Program Name: Pi_Cam_Color_Ball_Tracker.cpp                                     
 # ================================     
 # This code is for making an autonomous color ball detecter bot.
 # The bot can detect and track any color ball for which you have callibrated.
-#For callibration you have to run callibration program. There you can easily callibrate for any specific monocolor ball. For more information : refer to the callibration program                                  
+#For callibration you have to run callibration program. There you can easily callibrate for any specific monocolor ball. For more information : refer to the callibration program         
+#In this version I have changed the method by which I was detecting the ball. Now I am using Moments for detection folllowed by an if condition. Which moves the bot only when the number of white pixels in the thresholded image is greater than the specified value.                         
+#In this program  you can only see the thresholded image instead of original image just to know what is being tracked and changed the name of few variables
 # http://www.dexterindustries.com/                                                                
 # History
 # ------------------------------------------------
@@ -104,8 +106,7 @@ void move_bot(float offset, int normal_speed)
 	
 	if(fabs(offset)>0.4 && fabs(offset)<0.6)	// If the offset is more than 70% on either side from the center of the image
 	{
-		//if((normal_speed+normal_speed*0.05)<255)
-			speed_1=speed_2= 50; //Set the speed to 50
+		speed_1=speed_2= 50; //Set the speed to 50
 		
 		if(offset>0)		// If the x coordinate of the path is on the left side from the center
 		{
@@ -126,10 +127,8 @@ void move_bot(float offset, int normal_speed)
 	}
 	else if(fabs(offset)>0.6 )//&& fabs(offset)<0.6)	// If the offset is more than 70% on either side from the center of the image
 	{
-		//if((normal_speed+normal_speed*0.1)<255)
-			speed_1=speed_2= 60;	//Set the seed to 60
-		//else	
-			//speed_1=speed_2=255;
+		speed_1=speed_2= 60;	//Set the seed to 60
+	
 		if(offset>0)		// If the x coordinate of the path is on the left side from the center
 		{
 			speed_2 = 0;		//Stop the left wheel
@@ -148,49 +147,9 @@ void move_bot(float offset, int normal_speed)
 		
 		}	
 	}
-	/*else if(fabs(offset)>0.6 && fabs(offset)<0.8)	// If the offset is more than 70% on either side from the center of the image
-	{
-		//if((normal_speed+normal_speed*0.15)<255)
-			speed_1=speed_2=60;//normal_speed+normal_speed*0.15;		// Increase the speed of both wheels by 30%
-		//else	
-			//speed_1=speed_2=255;
-		if(offset>0)		// If the x coordinate of the path is on the left side from the center
-		{	
-			left();	
-			BrickPiUpdateValues();	//Update the motor values
-			//cout<<"l_0.6"<<endl;
-		}
-		else
-		{	
-			right();
-			BrickPiUpdateValues();	//Update the motor values
-			//cout<<"r_0.6"<<endl;
-		
-		}	
-	}
-	else if(fabs(offset)>0.8)	// If the offset is more than 90% on either side from the center of the image
-	{
-		//if((normal_speed+normal_speed*0.2)<255)
-			speed_1=speed_2=60;//normal_speed+normal_speed*0.2;		// Increase the speed of both wheels by 30%
-		//else	
-			//speed_1=speed_2=255;
-		if(offset>0)		// If the x coordinate of the path is on the left side from the center
-		{	
-			left();	
-			BrickPiUpdateValues();	//Update the motor values
-			//cout<<"l_0.8"<<endl;
-		}
-		else
-		{	
-			right();
-			BrickPiUpdateValues();	//Update the motor values
-			//cout<<"r_0.8"<<endl;
-		
-		}	
-	}*/
+	
 	else	// Move forward with the specified speed by the user
-	{
-		//speed_1=speed_2=max_speed;		
+	{		
 		fwd();
 		BrickPiUpdateValues();	//Update the motor values
 		//cout<<"s"<<endl;
@@ -254,8 +213,7 @@ result = BrickPiSetup();
 		cerr<<"Error opening the camera"<< endl;return -1;
 	}
 	
-	
-	clock_t t;
+	//clock_t t;
 	int HighS = 255;	// Higher S value which is initialized to the maximum of it.
 	
 	int HighV = 255;		// Higher V value which is initialized to the maximum of it.
@@ -263,7 +221,8 @@ result = BrickPiSetup();
 	namedWindow("Original", 0 ); //create a window called "Original"
  
 	while( true )	// infinte loop
-	{ 	t = clock();
+	{ 	
+		//t = clock();
 		imgOriginal = raspiCamCvQueryFrame( camera );		// Get the frame from camera
 
 		/*
@@ -300,15 +259,11 @@ result = BrickPiSetup();
 		*/
 		inRange(imgHSV, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), imgThresholded); //Threshold the image
 
-		/*
-		morphological opening (remove small objects from the foreground). It is obtained by the erosion of an image followed by a dilation.
-		*/
+		//morphological opening (remove small objects from the foreground). It is obtained by the erosion of an image followed by a dilation.		
 		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
 		dilate( imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
 
-		/*
-		morphological closing (fill small holes in the foreground). Useful to remove small holes (dark regions)
-		*/
+		//morphological closing (fill small holes in the foreground). Useful to remove small holes (dark regions)
 		dilate( imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
 		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
 		   
@@ -324,61 +279,6 @@ result = BrickPiSetup();
 		sigma_{y}: The standard deviation in y. Writing 0 implies that \sigma_{y} is calculated using kernel size.
 		*/
 		GaussianBlur( imgThresholded, imgThresholded, Size(3, 3), 2, 2 );
-	   
-		/*
-		hough transform to detect circle
-		void HoughCircles(InputArray image, OutputArray circles, int method, double dp, double minDist, double param1=100, double param2=100, int minRadius=0, int maxRadius=0 )		
-		Parameters:	
-			image – 8-bit, single-channel, grayscale input image.
-			circles – Output vector of found circles. Each vector is encoded as a 3-element floating-point vector  (x, y, radius) .
-			method – Detection method to use. Currently, the only implemented method is CV_HOUGH_GRADIENT , which is basically 21HT , described in [Yuen90].
-			dp – Inverse ratio of the accumulator resolution to the image resolution. For example, if dp=1 , the accumulator has the same resolution as the input image. If dp=2 , the accumulator has half as big width and height.
-			minDist – Minimum distance between the centers of the detected circles. If the parameter is too small, multiple neighbor circles may be falsely detected in addition to a true one. If it is too large, some circles may be missed.
-			param1 – First method-specific parameter. In case of CV_HOUGH_GRADIENT , it is the higher threshold of the two passed to the Canny() edge detector (the lower one is twice smaller).
-			param2 – Second method-specific parameter. In case of CV_HOUGH_GRADIENT , it is the accumulator threshold for the circle centers at the detection stage. The smaller it is, the more false circles may be detected. Circles, corresponding to the larger accumulator values, will be returned first.
-			minRadius – Minimum circle radius.
-			maxRadius – Maximum circle radius.
-		*/
-		//HoughCircles(imgThresholded, circles, CV_HOUGH_GRADIENT, 2,imgThresholded.rows/4, 100, 50, 10, 200);
-
-		/*if(circles.size())
-		{
-			Point center(cvRound(circles[0][0]), cvRound(circles[0][1]));		//Get the center for each circle
-			int radius = cvRound(circles[0][2]);		//Get the radius for each circle
-			float offset = (1-2*center.x/imgOriginal.cols);
-			move_bot(offset, normal_speed);	//Call the move_bot function which moves the bot with the specified speed
-
-			circle( imgOriginal, center, radius, Scalar(0,0,255), 3, 8, 0 );
-
-		}
-		else
-		{
-			stop();
-			BrickPiUpdateValues();	//Update the motor values
-		}*/
-		
-		/*for (int i = 0; i < circles.size(); i++)	//run a loop for all deeected circle
-		{   
-			Point center(cvRound(circles[0][0]), cvRound(circles[0][1]));		//Get the center for each circle
-		
-			int radius = cvRound(circles[0][2]);		//Get the radius for each circle
-			float offset = (1-2*center.x/imgOriginal.cols);
-			/*
-			void circle(Mat& img, Point center, int radius, const Scalar& color, int thickness=1, int lineType=8, int shift=0)
-				Parameters:	
-					img – Image where the circle is drawn.
-					center – Center of the circle.
-					radius – Radius of the circle.
-					color – Circle color.
-					thickness – Thickness of the circle outline, if positive. Negative thickness means that a filled circle is to be drawn.
-					lineType – Type of the circle boundary. See the line() description.
-					shift – Number of fractional bits in the coordinates of the center and in the radius value.
-			
-			//Draw circle cener.
-			//circle( imgOriginal, center, 3, Scalar(0,255,0), -1, 8, 0 );
-			// circle outline
-			circle( imgOriginal, center, radius, Scalar(0,0,255), 3, 8, 0 );
-		}*/
 		
 		/*
 		Moment is class to store some information about the pixel
@@ -395,27 +295,28 @@ result = BrickPiSetup();
 		
 		Point2f center(mu.m10/mu.m00, mu.m01/mu.m00);	//Calculate center of the white pixels in the imgThresholded image
 		//circle( imgOriginal, center, 5, Scalar(0,0,255), -1, 8, 0 );
-		t = clock()-t;
-		cout<<((float)t)/CLOCKS_PER_SEC<<endl;
-		
-		offset = (1-2*center.x/imgOriginal.cols);	// Offset from the center of the image 
 		
 		if(mu.m00 > 4000)	//Here 4000 is the number of white pixels. Since noise will always be there. Therefore we are moving the bot when some reasonable part of the ball gets detected.
 		{
+			offset = (1-2*center.x/imgOriginal.cols);	// Calculate the offset from the center of the image of the center of the center of the white pixels
+			
 			move_bot(offset, normal_speed);	//Call the move_bot function which moves the bot with the specified speed
 		}
 		else
+		{
 			stop();	// Stop the bot
 			BrickPiUpdateValues();	// Update the motor values
-
+		}
+		
+		//t = clock()-t;
+		//cout<<((float)t)/CLOCKS_PER_SEC<<endl; 
+		
 		imshow("Original", imgThresholded); //show the thresholded image
 		//imshow("Original", imgOriginal); 	//show the original image
 		
 		// Press ESc to stop this program
 		if( waitKey(1)== 27 ) 
 			break;
-
-
 	}
 	
 	raspiCamCvReleaseCapture(&camera);	// Close the the streaming.

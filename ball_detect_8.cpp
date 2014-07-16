@@ -4,7 +4,8 @@
 # ================================     
 # This code is for making an autonomous color ball detecter bot.
 # The bot can detect and track any color ball for which you have callibrated.
-#To callibrate this you need to run different program. There you can easily callibrate for any specific monocolor ball. For more information : refer to the callibration code                                  
+#To callibrate this you need to run different program. There you can easily callibrate for any specific monocolor ball. For more information : refer to the callibration code.
+#Here I have used HoughCircle function for deteting the ball from the processed image.                             
 # http://www.dexterindustries.com/                                                                
 # History
 # ------------------------------------------------
@@ -108,14 +109,14 @@ void move_bot(float offset, int normal_speed)
 		
 		if(offset>0)		// If the x coordinate of the path is on the left side from the center
 		{
-speed_2 = 0;	fwd();	
+			speed_2 = 0;	fwd();	
 			//left();	
 			BrickPiUpdateValues();	//Update the motor values
 			//cout<<"l_0.4"<<endl;
 		}
 		else
 		{	
-speed_1 = 0;	fwd();
+			speed_1 = 0;	fwd();
 			//right();
 			BrickPiUpdateValues();	//Update the motor values
 			//cout<<"r_0.4"<<endl;
@@ -130,14 +131,14 @@ speed_1 = 0;	fwd();
 			//speed_1=speed_2=255;
 		if(offset>0)		// If the x coordinate of the path is on the left side from the center
 		{
-speed_2 = 0;	fwd();	
+			speed_2 = 0;	fwd();	
 			//left();	
 			BrickPiUpdateValues();	//Update the motor values
 			//cout<<"l_0.4"<<endl;
 		}
 		else
 		{	
-speed_1 = 0;	fwd();
+			speed_1 = 0;	fwd();
 			//right();
 			BrickPiUpdateValues();	//Update the motor values
 			//cout<<"r_0.4"<<endl;
@@ -196,8 +197,8 @@ speed_1 = 0;	fwd();
 
 int main(int argc, char** argv)
 {
-ClearTick();
-result = BrickPiSetup();
+	ClearTick();
+	result = BrickPiSetup();
 	// printf("BrickPiSetup: %d\n", result);
 	if(result)
 		return 0;
@@ -222,7 +223,9 @@ result = BrickPiSetup();
 	string color_name;	// Color of the ball for which user wants to track the ball
 	color_name = argv[1];		// Get the color from the user at command line
 	int normal_speed = atoi(argv[2]);	//Set the normal speed 
-
+	vector<Vec3f> circles;	// Store the circle information
+	int radius;	//Radius of the detected cirlce
+	float offset;	//Amount of offset of the center of the circle from the center of the image
 	FileStorage fs;	// A variable to handle the file operation
 	
 	fs.open("test.yml", FileStorage::READ);	// Open the file with name test.yml in read mode. This test.yml is the same file which has been written by the mouse callibration function in previous program
@@ -246,7 +249,6 @@ result = BrickPiSetup();
 		cerr<<"Error opening the camera"<< endl;return -1;
 	}
 	
-	
 	//clock_t t;
 	int m_HighS = 255;	// Higher S value which is initialized to the maximum of it.
 	
@@ -255,7 +257,8 @@ result = BrickPiSetup();
 	namedWindow("Original", 0 ); //create a window called "Original"
  
 	while( true )	// infinte loop
-	{ 	//t = clock();
+	{ 	
+		//t = clock();
 		imgOriginal = raspiCamCvQueryFrame( camera );		// Get the frame from camera
 
 		/*
@@ -292,15 +295,11 @@ result = BrickPiSetup();
 		*/
 		inRange(imgHSV, Scalar(m_LowH, m_LowS, m_LowV), Scalar(m_HighH, m_HighS, m_HighV), imgThresholded); //Threshold the image
 
-		/*
-		morphological opening (remove small objects from the foreground). It is obtained by the erosion of an image followed by a dilation.
-		*/
-		//erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
-		//dilate( imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
+		//morphological opening (remove small objects from the foreground). It is obtained by the erosion of an image followed by a dilation.
+		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
+		dilate( imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
 
-		/*
-		morphological closing (fill small holes in the foreground). Useful to remove small holes (dark regions)
-		*/
+		//morphological closing (fill small holes in the foreground). Useful to remove small holes (dark regions)
 		dilate( imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
 		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
 		   
@@ -316,8 +315,6 @@ result = BrickPiSetup();
 		sigma_{y}: The standard deviation in y. Writing 0 implies that \sigma_{y} is calculated using kernel size.
 		*/
 		GaussianBlur( imgThresholded, imgThresholded, Size(3, 3), 2, 2 );
-		   
-		vector<Vec3f> circles;	// Store the circle information
 	   
 		/*
 		hough transform to detect circle
@@ -337,13 +334,13 @@ result = BrickPiSetup();
 
 		if(circles.size())
 		{
-			Point center(cvRound(circles[0][0]), cvRound(circles[0][1]));		//Get the center for each circle
-			int radius = cvRound(circles[0][2]);		//Get the radius for each circle
-			float offset = (1-2*center.x/imgOriginal.cols);
+			Point center(cvRound(circles[0][0]), cvRound(circles[0][1]));		//Get the center for first detected circle
+			radius = cvRound(circles[0][2]);		//Get the radius of the circle
+			
+			offset = (1-2*center.x/imgOriginal.cols);	//Calulates the offset from the center of image of center the circle.
 			move_bot(offset, normal_speed);	//Call the move_bot function which moves the bot with the specified speed
 
-			circle( imgOriginal, center, radius, Scalar(0,0,255), 3, 8, 0 );
-
+			circle( imgOriginal, center, radius, Scalar(0,0,255), 3, 8, 0 );	//Draw the circle on the image
 		}
 else
 {
@@ -373,20 +370,6 @@ else
 			// circle outline
 			circle( imgOriginal, center, radius, Scalar(0,0,255), 3, 8, 0 );
 		}*/
-//Moments mu = moments(imgThresholded,true);
-//Point2f center(mu.m10/mu.m00, mu.m01/mu.m00);
-//circle( imgOriginal, center, 5, Scalar(0,0,255), -1, 8, 0 );
-//t = clock()-t;
-//cout<<((float)t)/CLOCKS_PER_SEC<<endl;
-//float offset = (1-2*center.x/imgOriginal.cols);
-/*if(isnan(offset))
-{
-	stop();
-	BrickPiUpdateValues();	//Update the motor values
-}
-else
-move_bot(offset, normal_speed);	//Call the move_bot function which moves the bot with the specified speed
-*/
 
 		//imshow("Original", imgThresholded); //show the thresholded image
 		imshow("Original", imgOriginal); 	//show the original image
@@ -394,8 +377,6 @@ move_bot(offset, normal_speed);	//Call the move_bot function which moves the bot
 		// Press ESc to stop this program
 		if( waitKey(1)== 27 ) 
 			break;
-
-
 	}
 	
 	raspiCamCvReleaseCapture(&camera);	// Close the the streaming.

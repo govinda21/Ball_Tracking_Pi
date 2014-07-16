@@ -1,6 +1,6 @@
 /*
 ########################################################################                                                                 
-# Program Name: Pi_Cam_Color_Ball_Picker.cpp                                     
+# Program Name: Pi_Cam_Color_Ball_Tracker.cpp                                     
 # ================================     
 # This code is to callibrate an autonomous color ball detecter bot.
 # This program can be callibrate many balls at a single run.                            
@@ -18,7 +18,7 @@
 
 // Command:
 // Press Esc from your keyboard - To stop the program
-//Hit any to select the image for callibration.
+//Press y from keyboard to select the image for callibration.
 
 /* 
 How to compile:
@@ -32,9 +32,7 @@ my_code is the executable file, which will be created after the compilation of t
 /*
 How to run:
 
-./mycode color_name
-
-color_name - The name of color for which you have callibrated. This name is completely provided by you while running the callibration program.
+./mycode 
 
 */
 #include <iostream>
@@ -88,21 +86,22 @@ void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 		Mat frame = *((Mat*)userdata);	// Since the pointer is of void data type. Convert it to Mat* then use the dereferencing operator to get the data.
 		Mat HSV;	//To store HSV image
 		Mat BGR = frame( Rect( x, y, 1, 1 ) ); // Create a ROI with the position x, y are as specified by the mouse pointer while clicking from the image. The BGR matrix is of 1*1. 
+		
 		cvtColor( BGR, HSV, COLOR_BGR2HSV);	// Convert the BGR color to HSV color. It is similar to what we do it on the image instead of doing on 1 by 1  matrix.
 		
-		Vec3b hsv=HSV.at<Vec3b>(0,0);	// To store the HSV values from the HSV matrix
+		Vec3b hsv = HSV.at<Vec3b>(0,0);	// To store the HSV values from the HSV matrix
 		
-		int H=hsv.val[0]; // Get the hue value
-		int S=hsv.val[1]; // Get the saturation
-		int V=hsv.val[2]; // Get the V
+		int H = hsv.val[0]; // Get the hue value
+		int S = hsv.val[1]; // Get the saturation
+		int V = hsv.val[2]; // Get the V
 		
 		m_LowH = H - 3;	// Lower range for hue value
 		m_HighH = H + 3;	// Higher range for hue value
 		
 		m_LowS = (S - 0.3*255);	// Set the lower range for saturation value as 30% less than the detected S. This is because all the pixels will not be having the same S value.
 		m_LowV = (V - 0.3*255);	// Set the lower range for V value as 30% less than the detected V. This is because all the pixels will not be having the same V value.
-		assigned = true;	// This is just to say that intervals for the HSV valuse has been created.
 		
+		assigned = true;	// This is just to say that intervals for the HSV valuse has been created.
     }
 }
 
@@ -135,7 +134,7 @@ int main(int argc, char** argv)
 		//imshow("Original", imgThresholded); //show the thresholded image
 		imshow("Original", imgOriginal); //show the original image
 		
-		if(waitKey(1)==121) 	break;	//wait for 30 milli second. If any key is hit then go with this image
+		if(waitKey(1)==121) 	break;	//wait for 1 milli second. If any key is hit then go with this image
 
 	}
 	

@@ -1,10 +1,11 @@
 /*
 ########################################################################                                                                 
-# Program Name: Pi_Cam_Color_Ball_Picker.cpp                                     
-# ================================     
+# Program Name: Pi_Cam_Color_Ball_Tracker.cpp                                     
+# ================================    
+#In this version I changed some of variable name, removed unnecessary variable and added some more comment for better understanding
 # This code is to callibrate an autonomous color ball detector bot.
 # The program can  callibrate many balls at a single run.
-#Once you right clicked your mouse button on the ball, then you have specify some name for that ball in control panel.                            
+#Once you right clicked your mouse button on the ball, then you have to specify some name for that ball in control panel.                            
 # http://www.dexterindustries.com/                                                                
 # History
 # ------------------------------------------------
@@ -34,9 +35,7 @@ my_code is the executable file, which will be created after the compilation of t
 /*
 How to run:
 
-./mycode color_name
-
-color_name - The name of color for which you have callibrated. This name is completely provided by you while running the callibration program.
+./mycode 
 
 */
 #include <iostream>
@@ -53,7 +52,7 @@ using namespace std;
 // Variables to store the ranges of HSV values
 int LowH, HighH;	// Lower and higher limit of H values
 int LowS, LowV;	// Lower limit of S and V values
-bool assigned = false;	// Just to ensure that HSV value will be assigned for the specific color 
+bool assigned = false;	// Just to ensure that HSV value will be written on file only when user  right clicked the mouse on the center of ball  
 
 /*
 onMouse - Name of the callback function. Whenever mouse events related to the above window occur, this callback function will be called. This function should have the signature like the following
@@ -88,23 +87,24 @@ void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 		cout<<"R_Clicked"<<endl;
 		
 		Mat frame = *((Mat*)userdata);	// Since the pointer is of void data type. Convert it to Mat* then use the dereferencing operator to get the data.
-		Mat HSV;	//To store HSV image
-		Mat BGR = frame( Rect( x, y, 1, 1 ) ); // Create a ROI with the position x, y are as specified by the mouse pointer while clicking from the image. The BGR matrix is of 1*1. 
-		cvtColor( BGR, HSV, COLOR_BGR2HSV);	// Convert the BGR color to HSV color. It is similar to what we do it on the image instead of doing on 1 by 1  matrix.
+		Mat HSV;	// To store HSV image
+		Mat BGR = frame( Rect( x, y, 1, 1 ) ); // Create a ROI with the position x, y are as specified by the mouse pointer after clicking on the image. The BGR matrix is of 1*1. 
 		
-		Vec3b hsv=HSV.at<Vec3b>(0,0);	// To store the HSV values from the HSV matrix
+		cvtColor( BGR, HSV, COLOR_BGR2HSV );	// Convert the BGR color to HSV color. It is similar to what we do on image .
 		
-		int H=hsv.val[0]; // Get the hue value
-		int S=hsv.val[1]; // Get the saturation
-		int V=hsv.val[2]; // Get the V
+		Vec3b hsv = HSV.at<Vec3b>(0,0);	// To store the HSV values from the HSV matrix
+		
+		int H = hsv.val[0]; // Get the hue value
+		int S = hsv.val[1]; // Get the saturation value
+		int V = hsv.val[2]; // Get the V value
 		
 		LowH = H - 3;	// Lower range for hue value
 		HighH = H + 3;	// Higher range for hue value
 		
 		LowS = (S - 0.3*255);	// Set the lower range for saturation value as 30% less than the detected S. This is because all the pixels will not be having the same S value.
 		LowV = (V - 0.3*255);	// Set the lower range for V value as 30% less than the detected V. This is because all the pixels will not be having the same V value.
-		assigned = true;	// This is just to say that intervals for the HSV valuse has been created.
 		
+		assigned = true;	// This is just to say that intervals for the HSV valuse has been calculate and now we can write this on the file name test.yml
     }
 }
 
@@ -112,10 +112,9 @@ void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 int main(int argc, char** argv)
 {
 	Mat imgOriginal;	// To store images taken from camera in BGR form
-	Mat imgHSV;	// To store HSV image converted from imgOriginal
-	Mat imgThresholded;	// Thresholded image after lot of processing
 	
 	string color_name;		// To get the color name from user while callibration.
+	
 	RaspiCamCvCapture* camera = raspiCamCvCreateCameraCapture(0);	// Declare a variable to handle the streaming from Raspberry Pi Camera
 
 	cout<<"Opening Camera..."<<endl;
@@ -124,17 +123,16 @@ int main(int argc, char** argv)
 	{
 		cerr<<"Error opening the camera"<< endl;return -1;
 	}
-	//cout<<"If you feel the image is good for the callibration then hit any key"<<endl<<flush;
+	//cout<<"If you feel the image is good for the callibration then press y from keyboard"<<endl<<flush;
 	
-	namedWindow("Original", 0/*CV_WINDOW_AUTOSIZE*/); //create a window called "Control"
+	namedWindow("Original", 0);	//create a window called "Control"
 	
 	// This loop is just to avoid any bad quality image taken from Raspberry Pi camera in the beginning of streaming.
 	// Once the image has been selected. We can go for callibration.
 	while(true)	// Infinte loop
 	{
-		imgOriginal = raspiCamCvQueryFrame( camera );	// Get the frame from which is captured by camera
+		imgOriginal = raspiCamCvQueryFrame( camera );	// Get the frame from camera
 		
-		//imshow("Original", imgThresholded); //show the thresholded image
 		imshow("Original", imgOriginal); //show the original image
 		
 		if(waitKey(1)==121) 
@@ -148,7 +146,6 @@ int main(int argc, char** argv)
 
 	while( true )	// Infinte loop
 	{			
-		//imshow("Original", imgThresholded); //show the thresholded image
 		imshow("Original", imgOriginal); //show the original image
 		
 		/*
@@ -162,7 +159,7 @@ int main(int argc, char** argv)
 		//set the callback function for any mouse event
 		setMouseCallback("Original", CallBackFunc, &imgOriginal);  
 		
-		if(assigned)	// Just to ensure the right click of mouse from the user
+		if(assigned)	// Just to ensure the user have clicked the right mouse button from mouse
 		{
 			cout<<"Enter the color name:"<<flush;
 			cin>>color_name;	// Get the name of color
@@ -174,11 +171,11 @@ int main(int argc, char** argv)
 			fs<<"}";
 			
 			cout<<"done"<<endl;		// Print the confirmation of the callibration of the spe
-			assigned = false;
+			assigned = false;	
 		}
 		
 		// If ESC key pressed
-		if( waitKey(1)== 27 ) 
+		if( waitKey(1)== 27 ) 	//wait for 1 ms if Esc is pressed then break the loop
 			break;
 	}
 
