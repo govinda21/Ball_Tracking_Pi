@@ -294,13 +294,14 @@ result = BrickPiSetup();
 		mu = moments(imgThresholded,true);	//Get the moment property of the thresholded image
 		
 		Point2f center(mu.m10/mu.m00, mu.m01/mu.m00);	//Calculate center of the white pixels in the imgThresholded image
-		//circle( imgOriginal, center, 5, Scalar(0,0,255), -1, 8, 0 );
+		
 		
 		if(mu.m00 > 4000)	//Here 4000 is the number of white pixels. Since noise will always be there. Therefore we are moving the bot when some reasonable part of the ball gets detected.
 		{
 			offset = (1-2*center.x/imgOriginal.cols);	// Calculate the offset from the center of the image of the center of the center of the white pixels
 			
 			move_bot(offset, normal_speed);	//Call the move_bot function which moves the bot with the specified speed
+			circle( imgOriginal, center, 5, Scalar(0,0,255), -1, 8, 0 );	//Draw the circle to outline the ball
 		}
 		else
 		{
@@ -311,8 +312,8 @@ result = BrickPiSetup();
 		//t = clock()-t;
 		//cout<<((float)t)/CLOCKS_PER_SEC<<endl; 
 		
-		imshow("Original", imgThresholded); //show the thresholded image
-		//imshow("Original", imgOriginal); 	//show the original image
+		//imshow("Original", imgThresholded); //show the thresholded image
+		imshow("Original", imgOriginal); 	//show the original image
 		
 		// Press ESc to stop this program
 		if( waitKey(1)== 27 ) 
