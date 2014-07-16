@@ -31,7 +31,7 @@ Now let us build your own Ball Tracker Pi in following simple steps :
 				Here we divide our main task in two substeps:
 				
 			a> Callibration - Since we will be dealing with the color image, it is always prefer to work in HSV color space.
-									Does it sound strange? Camera give BGR format image then, how do I find the HSV format image?
+									Does it sound strange? Camera gives BGR format image then, how do I convert this image to HSV format image?
 									No, it is very simple. In opencv it is very simple to convert the BGR format to HSV.
 									There is a functin named cvtColor() can easily change your BGR format image to the HSV format.
 									H stands for Hue which has the color information. In opencv the value of H ranges from 0 t0 180.
