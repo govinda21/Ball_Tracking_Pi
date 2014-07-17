@@ -27,9 +27,9 @@ Now let us build your own Ball Tracker Pi in following simple steps
 
 2. **Callibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color 	space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV.In opencv, a functin named cvtColor() easily this sort of conversion.
 	
-	* H stands for Hue which has the color information. In opencv the value of H ranges from 0 to 180.
-	* S stands for Saturation which represents the saturation of the color i.e. purity of the color. In opencv the value of S ranges from 0 to 255.
-	* V stands for Value or Brightness which represents the brightness of the color i.e. how much bright the color 	is. In opencv the value of V ranges from 0 to 255.
+* H stands for Hue which has the color information. In opencv the value of H ranges from 0 to 180.
+* S stands for Saturation which represents the saturation of the color i.e. purity of the color. In opencv the value of S ranges from 0 to 255.
+* V stands for Value or Brightness which represents the brightness of the color i.e. how much bright the color 	is. In opencv the value of V ranges from 0 to 255.
 		
 	For making any bot to be intelligent enough to carry out some operatin by it is own. This requires callibration. This has to done for better and correct result. Since there are so many colors and correspondingly there are so many HSV values.
 		
