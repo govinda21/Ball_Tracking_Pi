@@ -1,7 +1,7 @@
 Ball Tracker Pi
 ================
 
-The project name is Ball Tracking Pi. It is an opencv project. In this project we will be using Raspberry Pi and Brick Pi. 
+This project will help you in tracking color ball. It is a basic opencv project. In this project we will be using Raspberry Pi and Brick Pi. 
 This project is to make an autonomous color ball tracker using the technique of image processing. It is a basic project in opencv. This will be a good start to opencv on Raspberry Pi platform.This will guide you from the installation of opencv on your Pi to the completion of this project.
 
 Components required for this project are
