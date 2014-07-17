@@ -37,7 +37,7 @@ Setting up the software in the following simple steps:
 		
 	Since the image has been locked. We can start the calibration. After hitting the "y" you might observed that the window is showing only one image. Move your cursor to the center of the ball in that window. Once click the right mouse button on the center of the ball.	Now in terminal you can give the color name of the ball or any 	name which you think is best for that ball. After specifying the color in terminal hit enter from the keyboard. Go to that window but don't use your right mouse button for doing this. Since right mouse button has been used to calibrate the color values of the ball.
 		
-	You can make use of left mouse button for selecting the window. If you want to calibrate more than one different color balls then follow the same procedure to select another ball. Once you are done with calibration, select the image window and press "Esc" from the keyboard.
+	You can make use of left mouse button for selecting the window. If you want to calibrate more than one different color balls then follow the same procedure to calibrate another ball. Once you are done with calibration, select the image window using the left mouse button and press "Esc" from the keyboard.
         
 	The calibration function creates a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in which the calibration function is.
         
