@@ -1,4 +1,4 @@
-Ball_Tracking_Pi
+Ball_Tracker_Pi
 ================
 
 The project name is Ball Tracking Pi is an opencv project. In this project we will be using Raspberry Pi and Brick Pi. 
