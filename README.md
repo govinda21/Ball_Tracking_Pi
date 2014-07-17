@@ -49,8 +49,8 @@ Now let us build your own Ball Tracker Pi in following simple steps
 
 	That's all for this project. Now you have your own Ball Tracker Pi with you. If you feel that caliration is not perfect you can modify some callibration parameter. For doing this we have two option. First we can make some change in the callibration function. Second the more easier way: Go to the test.yml file. There you will see the interval of HSV value for each balls which have been calibrated. There values can be tweaked easily for the ball which you want to track. Save the file. And run the main program to see the change. 
 			
-**ball_detect_7.cpp is the callibration function for the ball_detect_8.cpp main program.
-	ball_detect_8.cpp make use of HoughCircle method to find the ball.**
+**ball_detect_7.cpp is the callibration function for the ball_detect_8.cpp main program.**
+**ball_detect_8.cpp make use of HoughCircle method to find the ball.**
 			
 	**Whereas ball_detect_9.cpp is the callibration function for the ball_detect_10.cpp main program.
 	ball_detect_10.cpp make use of Moments method to find the ball.**
