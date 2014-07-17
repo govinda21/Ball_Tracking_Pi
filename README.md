@@ -5,15 +5,15 @@ The project name is Ball Tracking Pi is an opencv project. In this project we wi
 This project is to make an autonomous color ball tracker using the technique of image processing. It is a basic project in opencv. This will be a good start to opencv on Raspberry Pi platform.This will guide you from the installation of opencv on your Pi to the completion of this project.
 
 Components required for this project are:
-	..* Raspberry Pi
-	..* Raspberry Pi camera
-	..* Brick Pi ( for controlling motors )
-	..* Two lego motors
-	..* Wifi adapter 
-	..* Wifi connection
-	..* 8 GB SD card
-	..* Power cable for your Raspberry Pi
-	..* For safety of the Raspberry Pi, user may prefer the case for Raspberry Pi and Brick Pi  
+	* Raspberry Pi
+	* Raspberry Pi camera
+	* Brick Pi ( for controlling motors )
+	* Two lego motors
+	* Wifi adapter 
+	* Wifi connection
+	* 8 GB SD card
+	* Power cable for your Raspberry Pi
+	* For safety of the Raspberry Pi, user may prefer the case for Raspberry Pi and Brick Pi  
 	
 Now let us build your own Ball Tracker Pi in following simple steps,
 
