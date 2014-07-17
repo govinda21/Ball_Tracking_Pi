@@ -31,7 +31,7 @@ Setting up the software in the following simple steps:
 
 	* V stands for Value or Brightness which represents the brightness of the color i.e. how much bright the color is. In opencv the value of V ranges from 0 to 255.
 		
-	For making any bot to be intelligent enough to carry out some operatin by it is own. This requires calibration. This has to done for better and correct result. Since there are so many colors and correspondingly there are so many HSV values.
+	This project requires calibration. This has to done for better and correct result. Since there are so many colors and correspondingly there are so many HSV values.
 		
 	We don't need to remember any of these HSV values for the calibration. Since calibration is always an important part of the autonomous project. So to make the calibration easy enough that can be handle by any user. Here ten a user friendly program for this job. Run the calibration program. It will pop up a window there you can see images which is being captured by your Raspberry Pi camera. Make sure that the ball is in front of the camera with the background in which you want to run your Ball Tracker Pi. Since different lighting condition will 	results in different HSV values. Therefore we will always have to run the calibration function before starting the Ball Tracker Pi. If the ball is completly coming in the window which was poped up, then press "y" from your keyboard to lock this image for the calibration.
 		
