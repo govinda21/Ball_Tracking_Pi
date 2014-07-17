@@ -1,7 +1,7 @@
 Ball Tracker Pi
 ================
 
-The project name is Ball Tracking Pi is an opencv project. In this project we will be using Raspberry Pi and Brick Pi. 
+The project name is Ball Tracking Pi. It is an opencv project. In this project we will be using Raspberry Pi and Brick Pi. 
 This project is to make an autonomous color ball tracker using the technique of image processing. It is a basic project in opencv. This will be a good start to opencv on Raspberry Pi platform.This will guide you from the installation of opencv on your Pi to the completion of this project.
 
 Components required for this project are
@@ -13,16 +13,16 @@ Components required for this project are
 - Wifi connection
 - 8 GB SD card
 - Power cable for your Raspberry Pi
-- For safety of the Raspberry Pi, user may prefer the case for Raspberry Pi and Brick Pi  
+- For the safety of the Raspberry Pi, user may prefer the case for Raspberry Pi and Brick Pi  
 
 	
 Now let us build your own Ball Tracker Pi in following simple steps
 
-1. **Installation of opencv on your Raspberry Pi** - We will install opencv on the Raspberry Pi. Here is a guide for the installation of opencv on Raspberry Pi. Here is the link to the installatin guide for opencv on Raspberry Pi : https://docs.google.com/document/d/1op8RSzmRqjiwh9KCkuavni5GiDaExN0I9GA6pvZy1EI/edit With this document. Installation will be easier. Can be able to run some simple opencv program with and without using Raspberry Pi camera. 
+1. **Installation of opencv on your Raspberry Pi** - We will install opencv on the Raspberry Pi. Here is the link to the installation guide for opencv on Raspberry Pi: https://docs.google.com/document/d/1op8RSzmRqjiwh9KCkuavni5GiDaExN0I9GA6pvZy1EI/edit 
 	
 	**General Information about the following steps** 
     
-	To run this program on your Pi. Every color is made of 3 primary color namely Red(R), Green(G) and Blue(B). In short RGB. In opencv image captured from camera will be in BGR form means Blue, Green and Red. This might seeems that it just a change in the order of color. But it is not like that. In opencv the order by which we specify the color is dependent on the image matrix.
+	Every color is made of 3 primary color namely Red(R), Green(G) and Blue(B). In short RGB. In opencv image captured from camera will be in BGR form means Blue, Green and Red. In opencv the order by which we specify the color is dependent on the image matrix.
 	In opencv there are many color spaces other than RGB like HSV, GRAY etc. In this project we will be using HSV color space.
 
 2. **Callibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color 	space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV.In opencv, a functin named cvtColor() easily this sort of conversion.
