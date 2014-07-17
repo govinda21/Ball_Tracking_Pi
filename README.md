@@ -43,12 +43,7 @@ Now let us build your own Ball Tracker Pi in following simple steps
         
 3. **Detection and Tracking** - In this part is quite simpler than the callibration. First have to compile the source code. Now run the program with two arguments. *See the end of this ReadMe file for compilation and running of the source code*. 
 	
-**Arguments for running this program**	
-1. item
-
-2. item
-
-
+**Arguments for running this program**
 
 1. **color_name** - The name of the color of the ball which you have specified in part a.
 2. **speed** - The speed with which you want to move your Ball Tracker Pi. During the run of this program you will see the cirle which outlines the ball.
