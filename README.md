@@ -23,7 +23,7 @@ Setting up the software in the following simple steps:
 	Every color is made of 3 primary color namely Red(R), Green(G) and Blue(B). In short RGB. In opencv image captured from camera will be in BGR form means Blue, Green and Red. In opencv the order by which we specify the color is dependent on the image matrix.
 	In opencv there are many color spaces other than RGB like HSV, GRAY etc. We will use HSV color space for this project.
 
-2. **Callibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV format.
+2. **Calibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV format.
 	
 	* H stands for Hue which has the color information. In opencv the value of H ranges from 0 to 180.
 
@@ -31,17 +31,17 @@ Setting up the software in the following simple steps:
 
 	* V stands for Value or Brightness which represents the brightness of the color i.e. how much bright the color is. In opencv the value of V ranges from 0 to 255.
 		
-	For making any bot to be intelligent enough to carry out some operatin by it is own. This requires callibration. This has to done for better and correct result. Since there are so many colors and correspondingly there are so many HSV values.
+	For making any bot to be intelligent enough to carry out some operatin by it is own. This requires calibration. This has to done for better and correct result. Since there are so many colors and correspondingly there are so many HSV values.
 		
-	We don't need to remember any of these HSV values for the callibration. Since callibration is always an important part of the autonomous project. So to make the callibration easy enough that can be handle by any user. Here ten a user friendly program for this job. Run the callibration program. It will pop up a window there you can see images which is being captured by your Raspberry Pi camera. Make sure that the ball is in front of the camera with the background in which you want to run your Ball Tracker Pi. Since different lighting condition will 	results in different HSV values. Therefore we will always have to run the callibration function before starting the Ball Tracker Pi. If the ball is completly coming in the window which was poped up, then press "y" from your keyboard to lock this image for the callibration.
+	We don't need to remember any of these HSV values for the calibration. Since calibration is always an important part of the autonomous project. So to make the calibration easy enough that can be handle by any user. Here ten a user friendly program for this job. Run the calibration program. It will pop up a window there you can see images which is being captured by your Raspberry Pi camera. Make sure that the ball is in front of the camera with the background in which you want to run your Ball Tracker Pi. Since different lighting condition will 	results in different HSV values. Therefore we will always have to run the calibration function before starting the Ball Tracker Pi. If the ball is completly coming in the window which was poped up, then press "y" from your keyboard to lock this image for the calibration.
 		
-	Since the image has been locked. We can start the callibration. After the previous step you might obsserved that the window is showing only one image. Move your cursor to the center of the ball in that window. Click once your right mouse button on the center of the ball.	Now in terminal you can give the color name of the ball or any 	name which you think is best for your ball. After specifying the color in terminal hit enter from the keybpard. Go to that window but don't use your rifght mouse for doing this. Since right mouse button has been used to	callibrate the color values of the ball.
+	Since the image has been locked. We can start the calibration. After the previous step you might obsserved that the window is showing only one image. Move your cursor to the center of the ball in that window. Click once your right mouse button on the center of the ball.	Now in terminal you can give the color name of the ball or any 	name which you think is best for your ball. After specifying the color in terminal hit enter from the keybpard. Go to that window but don't use your rifght mouse for doing this. Since right mouse button has been used to	calibrate the color values of the ball.
 		
-	You can make use of left mouse button for selecting the window. If you want to callibrate more than one different color balls at a single run. You can do this also in a very simple way. Just make sure that the image which has been locked is having that ball.That's it. Now can do the same thing what you have done for the callibration of the first ball like move your cursor to center of the ball for which you want to callibrate. 	Then go to terminal give it a name. Hit enter and come back to the image window. Once you are done with callibration then hit "Esc" from your keyboard.
+	You can make use of left mouse button for selecting the window. If you want to calibrate more than one different color balls at a single run. You can do this also in a very simple way. Just make sure that the image which has been locked is having that ball.That's it. Now can do the same thing what you have done for the calibration of the first ball like move your cursor to center of the ball for which you want to calibrate. 	Then go to terminal give it a name. Hit enter and come back to the image window. Once you are done with calibration then hit "Esc" from your keyboard.
         
-	The callibration function creats a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in wich the callibration function is.
+	The calibration function creats a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in wich the calibration function is.
         
-**3. Detection and Tracking** - In this part is quite simpler than the callibration. First have to compile the source code. Now run the program with two arguments. See the end of this ReadMe file for *How to compile and run* the source code. 
+**3. Detection and Tracking** - In this part is quite simpler than the calibration. First have to compile the source code. Now run the program with two arguments. See the end of this ReadMe file for *How to compile and run* the source code. 
 	
 **Arguments for running this program**
 
@@ -49,15 +49,15 @@ Setting up the software in the following simple steps:
 2. **speed** - The speed with which you want to move your Ball Tracker Pi. During the run of this program you will see the cirle which outlines the ball.
 
 
-That's all for this project. Now you have your own Ball Tracker Pi with you. If you feel that caliration is not perfect you can modify some callibration parameter. For doing this we have two option. First we can make some change in the callibration function. Second the more easier way: Go to the test.yml file. There you will see the interval of HSV value for each balls which have been calibrated. There values can be tweaked easily for the ball which you want to track. Save the file. And run the main program to see the change. 
+That's all for this project. Now you have your own Ball Tracker Pi with you. If you feel that caliration is not perfect you can modify some calibration parameter. For doing this we have two option. First we can make some change in the calibration function. Second the more easier way: Go to the test.yml file. There you will see the interval of HSV value for each balls which have been calibrated. There values can be tweaked easily for the ball which you want to track. Save the file. And run the main program to see the change. 
 
 **Note:**
 
-ball_detect_7.cpp is the callibration function for the ball_detect_8.cpp main program.
+ball_detect_7.cpp is the calibration function for the ball_detect_8.cpp main program.
 
 ball_detect_8.cpp make use of HoughCircle method to find the ball.
 			
-Whereas ball_detect_9.cpp is the callibration function for the ball_detect_10.cpp main program.
+Whereas ball_detect_9.cpp is the calibration function for the ball_detect_10.cpp main program.
 
 ball_detect_10.cpp make use of Moments method to find the ball.
 			
@@ -76,7 +76,7 @@ g++ `pkg-config --cflags opencv` ball_detect_10.cpp -o test_2 `pkg-config --libs
 
 **How to run**
 
-*For the callibration function*
+*For the calibration function*
 ```C++
 ./test_1
 ```
