@@ -41,7 +41,7 @@ Setting up the software in the following simple steps:
         
 	The calibration function creates a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in which the calibration function is.
         
-**3. Detection and Tracking** - This part is simpler than the previous. First we will compile the source code. Now run the program with two arguments. See the end of this ReadMe file for *How to compile and run* the source code. 
+**3. Detection and Tracking** - This part is simpler than the previous. First we will compile the source code. Now we can run the program with two arguments. See the end of this ReadMe file for *How to compile and run* the source code. 
 	
 **Arguments for running this program**
 
