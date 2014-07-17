@@ -1,7 +1,7 @@
 Ball Tracker Pi
 ================
 
-This project will help you in tracking color ball. In this project we will be using Raspberry Pi and Brick Pi. This project is to make an autonomous color ball tracker robot using the technique of image processing. It is a basic project in opencv. This will be a good start to opencv on Raspberry Pi platform. This document will guide you from the installation of opencv on your Pi to the completion of a color ball tracker robot.
+This project will help you in tracking color ball. In this project we will be using Raspberry Pi and Brick Pi. This project is to make an autonomous color ball tracker robot using the technique of image processing. It is a basic project in opencv. This document will guide you from the installation of opencv on your Pi to the completion of a color ball tracker robot.
 
 Components required for this project are
 - Raspberry Pi
@@ -23,7 +23,7 @@ Setting up the software in the following simple steps:
 	Every color is made of 3 primary color namely Red(R), Green(G) and Blue(B). In short RGB. In opencv image captured from camera will be in BGR form means Blue, Green and Red. In opencv the order by which we specify the color is dependent on the image matrix.
 	In opencv there are many color spaces other than RGB like HSV, GRAY etc. We will use HSV color space for this project.
 
-2. **Calibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV format.
+2. **Calibration** - Since we will be dealing with the color image. It is always preferable to work in HSV color space. Camera gives BGR format image. In opencv it is very simple to convert the BGR format to HSV format.
 	
 	* H stands for Hue which has the color information. In opencv the value of H ranges from 0 to 180.
 
@@ -41,15 +41,15 @@ Setting up the software in the following simple steps:
         
 	The calibration function creates a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in which the calibration function is.
         
-**3. Detection and Tracking** - In this part is quite simpler than the calibration. First have to compile the source code. Now run the program with two arguments. See the end of this ReadMe file for *How to compile and run* the source code. 
+**3. Detection and Tracking** - This part is simpler than the previous. First we will compile the source code. Now run the program with two arguments. See the end of this ReadMe file for *How to compile and run* the source code. 
 	
 **Arguments for running this program**
 
-1. **color_name** - The name of the color of the ball which you have specified in part a.
+1. **color_name** - The name of the color of the ball which you have specified in step 2.
 2. **speed** - The speed with which you want to move your Ball Tracker Pi. During the run of this program you will see the circle which outlines the ball.
 
 
-That's all for this project. Now you have your own Ball Tracker Pi with you. If you feel that calibration is not perfect you can modify some calibration parameter. For doing this we have two option. First we can make some change in the calibration function. Second the more easier way: Go to the test.yml file. There you will see the interval of HSV value for each balls which have been calibrated. There values can be tweaked easily for the ball which you want to track. Save the file. And run the main program to see the change. 
+If you feel that calibration is not perfect you can try to modify one of the calibration parameters. For doing this we have two options. First we can make some changes in the calibration function. Second and the most easiest way, direct access to the test.yml file. There you will see the intervals of HSV value for each balls which have been calibrated. Values can be tweaked easily for the ball which you want to track from this method. Save the file. Run the main program . 
 
 **Note:**
 
