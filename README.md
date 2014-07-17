@@ -44,7 +44,6 @@ Now let us build your own Ball Tracker Pi in following simple steps
 	
 **Arguments for running this program**	
 1. The name of the color of the ball which you have specified in part a.
-
 2. The speed with which you want to move your Ball Tracker Pi. During the run of this program you will see the cirle which outlines the ball.
 
 
