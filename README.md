@@ -59,9 +59,11 @@ ball_detect_8.cpp make use of HoughCircle method to find the ball.
 			
 Whereas ball_detect_9.cpp is the calibration function for the ball_detect_10.cpp main program.
 
-ball_detect_10.cpp make use of Moments method to find the ball.
+ball_detect_10.cpp make use of Moments method to find the ball. 
+
+ball_detect_10.cpp is somewhat faster but not as reliable as ball_detect_8.cpp.
 			
-You can try both of these. Which suits best for you can go with that. Have a great fun with your Ball Tracker Pi.
+You can try both of these.
 
 **How to compile**
 
