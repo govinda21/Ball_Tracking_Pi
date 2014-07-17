@@ -46,10 +46,10 @@ Setting up the software in the following simple steps:
 **Arguments for running this program**
 
 1. **color_name** - The name of the color of the ball which you have specified in part a.
-2. **speed** - The speed with which you want to move your Ball Tracker Pi. During the run of this program you will see the cirle which outlines the ball.
+2. **speed** - The speed with which you want to move your Ball Tracker Pi. During the run of this program you will see the circle which outlines the ball.
 
 
-That's all for this project. Now you have your own Ball Tracker Pi with you. If you feel that caliration is not perfect you can modify some calibration parameter. For doing this we have two option. First we can make some change in the calibration function. Second the more easier way: Go to the test.yml file. There you will see the interval of HSV value for each balls which have been calibrated. There values can be tweaked easily for the ball which you want to track. Save the file. And run the main program to see the change. 
+That's all for this project. Now you have your own Ball Tracker Pi with you. If you feel that calibration is not perfect you can modify some calibration parameter. For doing this we have two option. First we can make some change in the calibration function. Second the more easier way: Go to the test.yml file. There you will see the interval of HSV value for each balls which have been calibrated. There values can be tweaked easily for the ball which you want to track. Save the file. And run the main program to see the change. 
 
 **Note:**
 
