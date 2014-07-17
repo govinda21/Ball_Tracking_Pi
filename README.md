@@ -5,29 +5,29 @@ The project name is Ball Tracking Pi is an opencv project. In this project we wi
 This project is to make an autonomous color ball tracker using the technique of image processing. It is a basic project in opencv. This will be a good start to opencv on Raspberry Pi platform.This will guide you from the installation of opencv on your Pi to the completion of this project.
 
 Components required for this project are:
-	..* Raspberry Pi
-	..* Raspberry Pi camera
-	..* Brick Pi ( for controlling motors )
-	..* Two lego motors
-	..* Wifi adapter 
-	..* Wifi connection
-	..* 8 GB SD card
-	..* Power cable for your Raspberry Pi
-	..* For safety of the Raspberry Pi, user may prefer the case for Raspberry Pi and Brick Pi  
+	* Raspberry Pi
+	* Raspberry Pi camera
+	* Brick Pi ( for controlling motors )
+	* Two lego motors
+	* Wifi adapter 
+	* Wifi connection
+	* 8 GB SD card
+	* Power cable for your Raspberry Pi
+	* For safety of the Raspberry Pi, user may prefer the case for Raspberry Pi and Brick Pi  
 	
-Now let us build your own Ball Tracker Pi in following simple steps,
+...Now let us build your own Ball Tracker Pi in following simple steps,...
 
-	**1. Installation of opencv on your Raspberry Pi** - We will install opencv on the Raspberry Pi. I have 			documented the installation guide for opencv on Raspberry Pi. Here is the link to the installatin guide for 	opencv on Raspberry Pi : https://docs.google.com/document/d/1op8RSzmRqjiwh9KCkuavni5GiDaExN0I9GA6pvZy1EI/edit With the 	help of that document you will be able to run some simple opencv program with and without using Raspberry Pi camera.
+	1. **Installation of opencv on your Raspberry Pi** - We will install opencv on the Raspberry Pi. I have 			documented the installation guide for opencv on Raspberry Pi. Here is the link to the installatin guide for 	opencv on Raspberry Pi : https://docs.google.com/document/d/1op8RSzmRqjiwh9KCkuavni5GiDaExN0I9GA6pvZy1EI/edit With the 	help of that document you will be able to run some simple opencv program with and without using Raspberry Pi camera.
 	
 **General Information about the following steps**
 	Making this program to run on your Pi - We all know every color is made of 3 primary color namely Red(R), Green(G) and Blue(B). In short RGB. In opencv image captured from camera will be in BGR form means Blue, Green and Red. You might have think that it just a change in the order of color. But it is not like that. In opencv the order by which we specify the color is dependent on the image matrix.
 	In opencv there are many color spaces other than RGB like HSV, GRAY etc. In this project we will be using 	HSV color space.
-	**2. Callibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color 	space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV.In opencv, a 		functin named cvtColor() easily this sort of conversion.
+	2. **Callibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color 	space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV.In opencv, a 		functin named cvtColor() easily this sort of conversion.
 	+ H stands for Hue which has the color information. In opencv the value of H ranges from 0 t0 180.
 	+ S stands for Saturation which represents the saturation of the color i.e. purity of the color. In opencv the 			value of S ranges from 0 to 255.
 	+ V stands for Value or Brightness which represents the brightness of the color i.e. how much bright the color 			is. In opencv the value of V ranges from 0 to 255.
 												
-	...For making any bot to be intelligent enough to carry out some operatin by it is own. This requires 				callibration. This has to done for better and correct result. Since there are so many colors and 			correspondingly there are so many HSV values...
+	...For making any bot to be intelligent enough to carry out some operatin by it is own. This requires 				callibration. This has to done for better and correct result. Since there are so many colors and 			correspondingly there are so many HSV values..
 		We don't need to remember any of these HSV values for the callibration. Since callibration is always an 		important part of the autonomous project. So to make the callibration easy enough that can be handle by any 	user. Here ten a user friendly program for this job. Run the callibration program. It will pop up a window there you 		can see	images which is being captured by your Raspberry Pi camera. Make sure that the ball is in front of the 		camera with the background in which you want to run your Ball Tracker Pi. Since different lighting condition will 	results in different HSV values. Therefore we will always have to run the callibration function before starting the 	Ball Tracker Pi. If the ball is completly coming in the window which was poped up, then press "y" from your keyboard 		to lock this image for the callibration.
 		Since image has been locked. We can start the callibration. After the previous step you might obsserved 		that the window is showing only one image. Move your cursor to the center of the ball in that window. Click 	once your right mouse button on the center of the ball.	Now in terminal you can give the color name of the ball or any 	name which you think is best for your ball. After specifying the color in terminal hit enter from the keybpard. Go to 			that window but don't use your rifght mouse for doing this. Since right mouse button has been used to 			callibrate the color values of the ball.
 		You can make use of left mouse button for selecting the window. If you want to callibrate more than one 		different color balls at a single run. You can do this also in a very simple way. Just make sure that the 		image which has been locked is having that ball.That's it. Now can do the same thing what you have done for 		the callibration of the first ball like move your cursor to center of the ball for which you want to callibrate. 	Then go to terminal give it a name. Hit enter and come back to the image window. Once you are done with 			callibration then hit "Esc" from your keyboard.
