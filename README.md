@@ -39,7 +39,7 @@ Setting up the software in the following simple steps:
 		
 	You can make use of left mouse button for selecting the window. If you want to calibrate more than one different color balls at a single run. You can do this also in a very simple way. Just make sure that the image which has been locked is having that ball.That's it. Now can do the same thing what you have done for the calibration of the first ball like move your cursor to center of the ball for which you want to calibrate. 	Then go to terminal give it a name. Hit enter and come back to the image window. Once you are done with calibration then hit "Esc" from your keyboard.
         
-	The calibration function creats a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in wich the calibration function is.
+	The calibration function creates a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in which the calibration function is.
         
 **3. Detection and Tracking** - In this part is quite simpler than the calibration. First have to compile the source code. Now run the program with two arguments. See the end of this ReadMe file for *How to compile and run* the source code. 
 	
