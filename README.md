@@ -20,8 +20,10 @@ Now let us build your own Ball Tracker Pi in following simple steps,
 	1. **Installation of opencv on your Raspberry Pi** - We will install opencv on the Raspberry Pi. I have 			documented the installation guide for opencv on Raspberry Pi. Here is the link to the installatin guide for 	opencv on Raspberry Pi : https://docs.google.com/document/d/1op8RSzmRqjiwh9KCkuavni5GiDaExN0I9GA6pvZy1EI/edit With the 	help of that document you will be able to run some simple opencv program with and without using Raspberry Pi camera.
 	
 **General Information about the following steps**
+
 	Making this program to run on your Pi - We all know every color is made of 3 primary color namely Red(R), Green(G) and Blue(B). In short RGB. In opencv image captured from camera will be in BGR form means Blue, Green and Red. You might have think that it just a change in the order of color. But it is not like that. In opencv the order by which we specify the color is dependent on the image matrix.
 	In opencv there are many color spaces other than RGB like HSV, GRAY etc. In this project we will be using 	HSV color space.
+	
 	2. **Callibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color 	space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV.In opencv, a 		functin named cvtColor() easily this sort of conversion.
 	+ H stands for Hue which has the color information. In opencv the value of H ranges from 0 t0 180.
 	+ S stands for Saturation which represents the saturation of the color i.e. purity of the color. In opencv the 			value of S ranges from 0 to 255.
