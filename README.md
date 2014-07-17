@@ -40,7 +40,7 @@ Now let us build your own Ball Tracker Pi in following simple steps
 		
         The callibration function creats a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in wich the callibration function is.
         
-3. **Detection and Tracking** - In this part is quite simpler than the compilation. First have to compile the 			source code. Now run the program with two arguments. *See the end of this ReadMe file for compilation and 		running of the source code*. 
+3. **Detection and Tracking** - In this part is quite simpler than the compilation. First have to compile the source code. Now run the program with two arguments. *See the end of this ReadMe file for compilation and running of the source code*. 
 	
 **Arguments for running this program**	
 1. The name of the color of the ball which you have specified in part a.
