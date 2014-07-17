@@ -1,37 +1,35 @@
 Ball Tracker Pi
 ================
 
-This project will help you in tracking color ball. It is a basic opencv project. In this project we will be using Raspberry Pi and Brick Pi. 
-This project is to make an autonomous color ball tracker using the technique of image processing. It is a basic project in opencv. This will be a good start to opencv on Raspberry Pi platform.This will guide you from the installation of opencv on your Pi to the completion of this project.
+This project will help you in tracking color ball. In this project we will be using Raspberry Pi and Brick Pi. This project is to make an autonomous color ball tracker robot using the technique of image processing. It is a basic project in opencv. This will be a good start to opencv on Raspberry Pi platform. This document will guide you from the installation of opencv on your Pi to the completion of a color ball tracker robot.
 
 Components required for this project are
 - Raspberry Pi
 - Raspberry Pi camera
-- Brick Pi ( for controlling motors )
+- Brick Pi
 - Two lego motors
 - Wifi adapter 
-- Wifi connection
 - 8 GB SD card
 - Power cable for your Raspberry Pi
 - For the safety of the Raspberry Pi, user may prefer the case for Raspberry Pi and Brick Pi  
 
 	
-Now let us build your own Ball Tracker Pi in following simple steps
+Setting up the software in the following simple steps:
 
 1. **Installation of opencv on your Raspberry Pi** - We will install opencv on the Raspberry Pi. Here is the link to the installation guide for opencv on Raspberry Pi: https://docs.google.com/document/d/1op8RSzmRqjiwh9KCkuavni5GiDaExN0I9GA6pvZy1EI/edit 
 	
-	**General Information about the following steps** 
+	**General Information for the following steps** 
     
 	Every color is made of 3 primary color namely Red(R), Green(G) and Blue(B). In short RGB. In opencv image captured from camera will be in BGR form means Blue, Green and Red. In opencv the order by which we specify the color is dependent on the image matrix.
-	In opencv there are many color spaces other than RGB like HSV, GRAY etc. In this project we will be using HSV color space.
+	In opencv there are many color spaces other than RGB like HSV, GRAY etc. We will use HSV color space for this project.
 
-2. **Callibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color 	space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV.In opencv, a functin named cvtColor() easily this sort of conversion.
+2. **Callibration** - Since we will be dealing with the color image, it is always preferable to work in HSV color space. Camera gives BGR format image. It is very simple in opencv to convert the BGR format to HSV format.
 	
 	* H stands for Hue which has the color information. In opencv the value of H ranges from 0 to 180.
 
 	* S stands for Saturation which represents the saturation of the color i.e. purity of the color. In opencv the value of S ranges from 0 to 255.
 
-	* V stands for Value or Brightness which represents the brightness of the color i.e. how much bright the color 	is. In opencv the value of V ranges from 0 to 255.
+	* V stands for Value or Brightness which represents the brightness of the color i.e. how much bright the color is. In opencv the value of V ranges from 0 to 255.
 		
 	For making any bot to be intelligent enough to carry out some operatin by it is own. This requires callibration. This has to done for better and correct result. Since there are so many colors and correspondingly there are so many HSV values.
 		
@@ -43,7 +41,7 @@ Now let us build your own Ball Tracker Pi in following simple steps
         
 	The callibration function creats a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in wich the callibration function is.
         
-**3. Detection and Tracking** - In this part is quite simpler than the callibration. First have to compile the source code. Now run the program with two arguments. *See the end of this ReadMe file for compilation and running of the source code*. 
+**3. Detection and Tracking** - In this part is quite simpler than the callibration. First have to compile the source code. Now run the program with two arguments. See the end of this ReadMe file for *How to compile and run* the source code. 
 	
 **Arguments for running this program**
 
