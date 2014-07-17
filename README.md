@@ -38,8 +38,7 @@ Now let us build your own Ball Tracker Pi in following simple steps
         Since the image has been locked. We can start the callibration. After the previous step you might obsserved that the window is showing only one image. Move your cursor to the center of the ball in that window. Click once your right mouse button on the center of the ball.	Now in terminal you can give the color name of the ball or any 	name which you think is best for your ball. After specifying the color in terminal hit enter from the keybpard. Go to that window but don't use your rifght mouse for doing this. Since right mouse button has been used to	callibrate the color values of the ball.
 		
         You can make use of left mouse button for selecting the window. If you want to callibrate more than one different color balls at a single run. You can do this also in a very simple way. Just make sure that the image which has been locked is having that ball.That's it. Now can do the same thing what you have done for the callibration of the first ball like move your cursor to center of the ball for which you want to callibrate. 	Then go to terminal give it a name. Hit enter and come back to the image window. Once you are done with callibration then hit "Esc" from your keyboard.
-		
-        The callibration function creats a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in wich the callibration function is.
+		The callibration function creats a test.yml file for storing the color values, which will be used by the main program. The test.yml file can be find in the directory in wich the callibration function is.
         
 3. **Detection and Tracking** - In this part is quite simpler than the callibration. First have to compile the source code. Now run the program with two arguments. *See the end of this ReadMe file for compilation and running of the source code*. 
 	
